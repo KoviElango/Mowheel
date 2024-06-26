@@ -71,17 +71,11 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.lifecycle.runtime.ktx.v240)
     implementation(libs.androidx.activity.compose.v140)
-
-    // Retrofit
+    implementation (libs.androidx.ui.v130)
+    implementation (libs.material3)
+    implementation (libs.androidx.ui.tooling.preview.v130)
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
-    implementation (libs.okhttp)
+    implementation (libs.kotlinx.coroutines.android.v164)
+    }
 
-    // Coroutines
-    implementation (libs.kotlinx.coroutines.core)
-    implementation (libs.kotlinx.coroutines.android)
-
-    // Coroutine Lifecycle Scopes
-    implementation (libs.androidx.lifecycle.viewmodel.ktx)
-    implementation (libs.androidx.lifecycle.runtime.ktx.v220)
-}
