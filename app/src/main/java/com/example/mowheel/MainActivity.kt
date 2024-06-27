@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mowheel.ui.theme.MowheelTheme
@@ -92,6 +93,7 @@ fun RoundButton() {
     var movieData by remember { mutableStateOf<Movie?>(null) }
     var isLoading by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
+    val textStyle = TextStyle(color = Color.Black)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -99,6 +101,7 @@ fun RoundButton() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
+            .padding(16.dp)
     ) {
         Button(
             onClick = {
@@ -134,8 +137,20 @@ fun RoundButton() {
 
         movieData?.let { movie ->
             Spacer(modifier = Modifier.height(16.dp))
-            Text("Title: ${movie.Title}")
-            Text("Year: ${movie.Year}")
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Title: ${movie.Title}", style = textStyle)
+            Text("Year: ${movie.Year}", style = textStyle)
+            Text("Rated: ${movie.Rated}", style = textStyle)
+            Text("Released: ${movie.Released}", style = textStyle)
+            Text("Runtime: ${movie.Runtime}", style = textStyle)
+            Text("Genre: ${movie.Genre}", style = textStyle)
+            Text("Director: ${movie.Director}", style = textStyle)
+            Text("Writer: ${movie.Writer}", style = textStyle)
+            Text("Actors: ${movie.Actors}", style = textStyle)
+            Text("Plot: ${movie.Plot}", style = textStyle)
+            Text("Language: ${movie.Language}", style = textStyle)
+            Text("Country: ${movie.Country}", style = textStyle)
+            Text("Awards: ${movie.Awards}", style = textStyle)
         }
     }
 }
