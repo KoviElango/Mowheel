@@ -1,0 +1,10 @@
+IMDB Top 250 Movies Analysis
+This project involves analyzing IMDb data to retrieve the top 250 movies based on their ratings. The analysis was performed using Python and pandas, and the data was analyzed in a Jupyter Notebook.
+
+Project Overview
+The main objectives of this project are:
+1. Load IMDb data from TSV (Tab-Separated Values) files.
+2. Merge the datasets to create a comprehensive DataFrame containing movie details and their ratings.
+3. Filter the dataset to include only movies.
+4. Sort the movies based on their average ratings and number of votes.
+5. Retrieve and display the top 250 movies.
