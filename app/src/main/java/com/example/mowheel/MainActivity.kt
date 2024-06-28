@@ -5,12 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -103,9 +101,9 @@ fun RoundButton() {
             .background(Color.White)
             .padding(16.dp)
     ) {
-        Button(
+        MovieButton(
+            isLoading = isLoading,
             onClick = {
-                println("Button clicked!") // Add this line for debugging
                 isLoading = true
                 coroutineScope.launch(Dispatchers.IO) {
                     try {
@@ -121,22 +119,10 @@ fun RoundButton() {
                         isLoading = false
                     }
                 }
-            },
-            modifier = Modifier
-                .size(100.dp)
-                .clip(CircleShape)
-                .background(Color.Blue),
-            contentPadding = PaddingValues(16.dp)
-        ) {
-            if (isLoading) {
-                CircularProgressIndicator(modifier = Modifier.size(24.dp))
-            } else {
-                Text("Movie!", color = Color.White)
             }
-        }
+        )
 
         movieData?.let { movie ->
-            Spacer(modifier = Modifier.height(16.dp))
             Spacer(modifier = Modifier.height(16.dp))
             Text("Title: ${movie.Title}", style = textStyle)
             Text("Year: ${movie.Year}", style = textStyle)
