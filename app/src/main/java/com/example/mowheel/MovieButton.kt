@@ -98,7 +98,7 @@ fun MovieButton(isLoading: Boolean, onClick: () -> Unit) {
         if (isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else {
-            Text("Movie!", modifier = Modifier.align(Alignment.Center))
+            Text("Movie!", modifier = Modifier.align(Alignment.Center), color = Color.Black)
         }
     }
 }
