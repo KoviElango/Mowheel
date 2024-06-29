@@ -8,6 +8,9 @@ IMDB API Integration
 Loading Indicator: Displays a loading indicator while fetching data.
 Error Handling: Provides basic error handling for network calls.
 
+Upcoming Features:
+Display the movie poster as background of the app; make a watcged list; select category feature
+
 Dependencies:
 
 Jetpack Compose: For building the UI.
