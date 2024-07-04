@@ -77,6 +77,7 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
     implementation (libs.kotlinx.coroutines.android.v164)
-    implementation ("androidx.graphics:graphics-shapes:1.0.0-alpha05")
+    implementation (libs.androidx.graphics.shapes)
+    implementation (libs.coil.compose.v200)
     }
 
