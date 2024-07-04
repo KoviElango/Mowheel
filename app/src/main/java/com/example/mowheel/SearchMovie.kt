@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -32,45 +33,53 @@ fun SearchMovie() {
             .background(Color.White)
             .padding(16.dp)
     ) {
-        posterUrl?.let { url ->
-            Image(
-                painter = rememberAsyncImagePainter(url),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(400.dp),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-
-        MovieButton(
-            isLoading = isLoading,
-            onClick = {
-                isLoading = true
-                coroutineScope.launch {
-                    movieData = APIOperations.fetchMovieDetails(imdbId, apiKey)
-                    posterUrl = movieData?.let { APIOperations.getMoviePosterUrl(imdbId, apiKey) }
-                    isLoading = false
-                }
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .weight(0.5f)
+        ) {
+            posterUrl?.let { url ->
+                Image(
+                    painter = rememberAsyncImagePainter(url),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .graphicsLayer {
+                            alpha = 0.3f
+                            shadowElevation = 20.dp.toPx()
+                            clip = true
+                        },
+                    contentScale = ContentScale.Crop
+                )
             }
-        )
+            }
+                MovieButton(
+                    isLoading = isLoading,
+                    onClick = {
+                        isLoading = true
+                        coroutineScope.launch {
+                            movieData = APIOperations.fetchMovieDetails(imdbId, apiKey)
+                            posterUrl =
+                                movieData?.let { APIOperations.getMoviePosterUrl(imdbId, apiKey) }
+                            isLoading = false
+                        }
+                    }
+                )
 
-        movieData?.let { movie ->
-            Spacer(modifier = Modifier.height(16.dp))
-            Text("Title: ${movie.Title}", style = textStyle)
-            Text("Year: ${movie.Year}", style = textStyle)
-            Text("Rated: ${movie.Rated}", style = textStyle)
-            Text("Released: ${movie.Released}", style = textStyle)
-            Text("Runtime: ${movie.Runtime}", style = textStyle)
-            Text("Genre: ${movie.Genre}", style = textStyle)
-            Text("Director: ${movie.Director}", style = textStyle)
-            Text("Writer: ${movie.Writer}", style = textStyle)
-            Text("Actors: ${movie.Actors}", style = textStyle)
-            Text("Plot: ${movie.Plot}", style = textStyle)
-            Text("Language: ${movie.Language}", style = textStyle)
-            Text("Country: ${movie.Country}", style = textStyle)
-            Text("Awards: ${movie.Awards}", style = textStyle)
+                movieData?.let { movie ->
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text("Title: ${movie.Title}", style = textStyle)
+                    Text("Year: ${movie.Year}", style = textStyle)
+                    Text("Rated: ${movie.Rated}", style = textStyle)
+                    Text("Released: ${movie.Released}", style = textStyle)
+                    Text("Runtime: ${movie.Runtime}", style = textStyle)
+                    Text("Genre: ${movie.Genre}", style = textStyle)
+                    Text("Director: ${movie.Director}", style = textStyle)
+                    Text("Writer: ${movie.Writer}", style = textStyle)
+                    Text("Actors: ${movie.Actors}", style = textStyle)
+                    Text("Plot: ${movie.Plot}", style = textStyle)
+                    Text("Language: ${movie.Language}", style = textStyle)
+                    Text("Country: ${movie.Country}", style = textStyle)
+                    Text("Awards: ${movie.Awards}", style = textStyle)
+                }
         }
     }
-}

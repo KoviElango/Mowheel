@@ -39,6 +39,7 @@ android {
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
@@ -78,6 +79,12 @@ dependencies {
     implementation (libs.converter.gson)
     implementation (libs.kotlinx.coroutines.android.v164)
     implementation (libs.androidx.graphics.shapes)
+    implementation(libs.coil.compose.v222)
+    implementation(libs.ui)
     implementation (libs.coil.compose.v200)
+    implementation (libs.androidx.core.ktx.v170)
+    implementation (libs.androidx.ui.v110)
+    implementation (libs.androidx.material3.v100alpha14)
+    implementation (libs.androidx.runtime.livedata)
     }
 
