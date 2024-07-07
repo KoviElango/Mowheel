@@ -1,4 +1,3 @@
-// MovieButton.kt
 package com.example.mowheel
 
 import androidx.compose.animation.core.Spring
@@ -19,11 +18,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.asComposePath
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -33,17 +33,18 @@ import androidx.graphics.shapes.RoundedPolygon
 import androidx.graphics.shapes.star
 import androidx.graphics.shapes.toPath
 
+
 class MorphPolygonShape(
     private val morph: Morph,
     private val percentage: Float
 ) : androidx.compose.ui.graphics.Shape {
 
-    private val matrix = Matrix()
     override fun createOutline(
-        size: Size,
+        size: androidx.compose.ui.geometry.Size,
         layoutDirection: LayoutDirection,
         density: Density
     ): Outline {
+        val matrix = androidx.compose.ui.graphics.Matrix()
         matrix.scale(size.width / 2f, size.height / 2f)
         matrix.translate(1f, 1f)
 
@@ -84,8 +85,13 @@ fun MovieButton(isLoading: Boolean, onClick: () -> Unit) {
             .size(200.dp)
             .padding(8.dp)
             .clip(MorphPolygonShape(morph, animatedProgress.value))
-            .background(Color(0xFF80DEEA))
-            .size(200.dp)
+            .graphicsLayer {
+                shape = androidx.compose.foundation.shape.CircleShape
+                clip = true
+                alpha = 0.8f // Adjusted for semi-transparency
+                shadowElevation = 8.dp.toPx()
+            }
+            .background(Color.White.copy(alpha = 0.5f)) // Adjusted for semi-transparency
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick()
             }
@@ -93,7 +99,35 @@ fun MovieButton(isLoading: Boolean, onClick: () -> Unit) {
         if (isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         } else {
-            Text("Movie!", modifier = Modifier.align(Alignment.Center), color = Color.Black)
+            EmbossedText("Movie!", Modifier.align(Alignment.Center))
         }
     }
 }
+
+@Composable
+fun EmbossedText(text: String, modifier: Modifier = Modifier) {
+    Box(modifier) {
+        Text(
+            text = text,
+            color = Color.Black.copy(alpha = 0.75f),
+            modifier = Modifier.graphicsLayer(
+                translationX = 2f,
+                translationY = 2f
+            )
+        )
+        Text(
+            text = text,
+            color = Color.White,
+            modifier = Modifier.graphicsLayer(
+                translationX = -2f,
+                translationY = -2f
+            )
+        )
+        Text(
+            text = text,
+            color = Color.Black
+        )
+    }
+}
+
+
